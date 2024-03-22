@@ -1,6 +1,10 @@
 {
-  "plugins": ["simple-import-sort"],
-  "extends": ["next/core-web-vitals", "plugin:prettier/recommended"],
+  "plugins": [
+    "simple-import-sort"
+  ],
+  "extends": [
+    "next/core-web-vitals"
+  ],
   "rules": {
     // Import formatting.
     "simple-import-sort/imports": "warn",
