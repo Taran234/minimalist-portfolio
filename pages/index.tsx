@@ -24,20 +24,19 @@ export default function Home(
   return (
     <>
       <Head>
-        <title>Foldaway</title>
+        <title>Minimalist</title>
         <meta name="description" content="Pursuing pointlessness" />
 
         {/* Open graph */}
-        <meta property="og:title" content="Foldaway" />
+        <meta property="og:title" content="Minimalist" />
         <meta property="og:description" content="Pursuing pointlessness" />
         <meta
           property="og:image"
-          content={`${
-            process.env.VERCEL_URL ? "https://" + process.env.VERCEL_URL : ""
-          }/og.png`}
+          content={`${process.env.VERCEL_URL ? "https://" + process.env.VERCEL_URL : ""
+            }/og.png`}
         />
         <meta property="og:type" content="website" />
-        <meta property="og:site_name" content="Foldaway" />
+        <meta property="og:site_name" content="Minimalist" />
         <meta
           property="og:url"
           content={
@@ -47,13 +46,12 @@ export default function Home(
 
         {/* twitter */}
         <meta name="twitter:card" content="summary_large_image" />
-        <meta name="twitter:title" content="Foldaway" />
+        <meta name="twitter:title" content="Minimalist" />
         <meta name="twitter:description" content="Pursuing pointlessness" />
         <meta
           name="twitter:image"
-          content={`${
-            process.env.VERCEL_URL ? "https://" + process.env.VERCEL_URL : ""
-          }/og.png`}
+          content={`${process.env.VERCEL_URL ? "https://" + process.env.VERCEL_URL : ""
+            }/og.png`}
         />
 
         {/* Favicon */}
@@ -91,7 +89,7 @@ export default function Home(
             <div className="flex flex-col gap-y-4">
               <Logo />
               <h1 className="font-medium text-neutral-900 dark:text-neutral-50">
-                Foldaway
+                Minimalist
               </h1>
             </div>
             <ThemePicker />
@@ -99,42 +97,35 @@ export default function Home(
 
           <Section heading="About">
             <Paragraph>
-              It all started from the foldaway table in Duncan&apos;s room. Back
-              then, on the occasional weekend, we&apos;ll all cram in his room,
-              assemble the foldaway table, and start hacking at silly projects
-              that are, more often than not, just plain pointless.
-              <br />
-              <br />
-              Pointless yes, but also fun. It&apos;s been a while since
-              we&apos;ve all gathered at our foldaway table, but its spirit
-              lives on in the silly pointless projects we continue hacking on.
+              In a bustling city, there was a park bench where friends often met. They shared stories, dreams, and laughter under the old oak tree. One day, they decided to create a time capsule, each adding a memento. As years passed, they returned, remembering their youth and the bonds they forged.<br /><br />
+              This website is designed and created by ByteBrewery.
             </Paragraph>
           </Section>
 
           <Section heading="People">
             <div className="flex flex-wrap items-start gap-y-4 gap-x-3">
-              {props.organization.membersWithRole.edges
+              <User name="Taran" websiteUrl="https://taranjeetsingh.vercel.app" imgUrl="https://images.pexels.com/photos/1680172/pexels-photo-1680172.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2" />
+              <User name="Tyson" websiteUrl="https://taranjeetsingh.vercel.app" imgUrl="https://images.pexels.com/photos/2932748/pexels-photo-2932748.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2" />
+              <User name="Jordan" websiteUrl="https://taranjeetsingh.vercel.app" imgUrl="https://images.pexels.com/photos/2144383/pexels-photo-2144383.jpeg?auto=compress&cs=tinysrgb&w=600&lazy=load" />
+              <User name="John" websiteUrl="https://taranjeetsingh.vercel.app" imgUrl="https://images.pexels.com/photos/3293039/pexels-photo-3293039.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2" />
+              {/* {props.organization.membersWithRole.edges
                 .filter((edge) => !edge.node.login.endsWith("-bot"))
                 .map((edge) => (
                   <User key={edge.cursor} user={edge.node} />
-                ))}
+                ))} */}
             </div>
           </Section>
 
           <Section heading="Projects">
             <div className="flex flex-col gap-y-3">
-              {props.organization.pinnedItems.edges.map((pinnableItemEdge) => (
-                <Project
-                  key={pinnableItemEdge.cursor}
-                  project={pinnableItemEdge}
-                  contributors={
-                    props.repoContributorsMap[pinnableItemEdge.node.name]
-                  }
-                />
-              ))}
+              <Project name="Keycom App" avatarUrl="https://play-lh.googleusercontent.com/38wFgdu-94w-zuJrVTlZ8UoflMcMsQl24r4I15SNiu5ceDMassdHhz02aE-8YH9Fvhw=w240-h480-rw" url="https://keycom.world/" description="Chat app for building Management to send message broadcasts about notices to users within the building" />
+              <Project name="Blog Website" avatarUrl="https://images.pexels.com/photos/1029757/pexels-photo-1029757.jpeg?cs=srgb&dl=pexels-format-1029757.jpg&fm=jpg" url="" description="Platform for sharing articles, stories, or information. " />
+              <Project name="Forum Website" avatarUrl="https://images.pexels.com/photos/7129617/pexels-photo-7129617.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2" url="" description="Online discussion platform where users can post questions, share information, and engage in discussions." />
+              <Project name="Educational Website" avatarUrl="https://images.pexels.com/photos/1779487/pexels-photo-1779487.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2" url="" description="Platform for learning and education, offering courses, tutorials, and educational resources." />
+
               <div className="pt-4 text-center">
                 <a
-                  href={props.organization.url}
+                  href={"https://github.com/Taran234"}
                   target="_blank"
                   rel="noreferrer"
                   className={classNames(
@@ -163,109 +154,116 @@ export default function Home(
 }
 
 export async function getStaticProps() {
-  if (process.env.NEXT_PUBLIC_ORG_NAME === undefined) return;
-
-  const octokit = new Octokit({ auth: process.env.GITHUB_API_TOKEN });
-
-  const { organization } = await octokit.graphql<{
-    organization: GitHub.GraphQL.API.Organization;
-  }>(`
-    query PinnedReposQuery {
-      organization(login: "${process.env.NEXT_PUBLIC_ORG_NAME}") {
-        url
-        membersWithRole(first: 50) {
-          edges {
-            node {
-              name
-              login
-              avatarUrl
-              websiteUrl
-              url
-            }
-            cursor
-          }
-        }
-        pinnedItems(types: [REPOSITORY], first: 10) {
-          edges {
-            node {
-              ... on Repository {
-                name
-                description
-                url
-              }
-            }
-            cursor
-          }
-        }
+  if (process.env.NEXT_PUBLIC_ORG_NAME === undefined) {
+    return {
+      props: {
+        organization: null // Return null if org name is not defined
       }
-    }
-  `);
+    };
+
+  }
+
+  // const octokit = new Octokit({ auth: process.env.GITHUB_API_TOKEN });
+
+  // const { organization } = await octokit.graphql<{
+  //   organization: GitHub.GraphQL.API.Organization;
+  // }>(`
+  //   query PinnedReposQuery {
+  //     organization(login: "${process.env.NEXT_PUBLIC_ORG_NAME}") {
+  //       url
+  //       membersWithRole(first: 50) {
+  //         edges {
+  //           node {
+  //             name
+  //             login
+  //             avatarUrl
+  //             websiteUrl
+  //             url
+  //           }
+  //           cursor
+  //         }
+  //       }
+  //       pinnedItems(types: [REPOSITORY], first: 10) {
+  //         edges {
+  //           node {
+  //             ... on Repository {
+  //               name
+  //               description
+  //               url
+  //             }
+  //           }
+  //           cursor
+  //         }
+  //       }
+  //     }
+  //   }
+  // `);
 
   /**
    * Map of org member login (a.k.a. handle) to {@link GitHub.GraphQL.API.User}
    */
-  const orgMembersMap: Record<string, GitHub.GraphQL.API.User> = {};
+  // const orgMembersMap: Record<string, GitHub.GraphQL.API.User> = {};
 
-  for (const orgMemberEdge of organization.membersWithRole.edges) {
-    orgMembersMap[orgMemberEdge.node.login] = orgMemberEdge.node;
-  }
+  // for (const orgMemberEdge of organization.membersWithRole.edges) {
+  //   orgMembersMap[orgMemberEdge.node.login] = orgMemberEdge.node;
+  // }
 
-  /**
-   * Map of repo name to its contributors
-   */
-  const repoContributorsMap: Record<string, GitHub.GraphQL.API.User[]> = {};
+  // /**
+  //  * Map of repo name to its contributors
+  //  */
+  // const repoContributorsMap: Record<string, GitHub.GraphQL.API.User[]> = {};
 
-  for (const pinnableItemEdge of organization.pinnedItems.edges) {
-    const repo = pinnableItemEdge.node.name;
+  // for (const pinnableItemEdge of organization.pinnedItems.edges) {
+  //   const repo = pinnableItemEdge.node.name;
 
-    /**
-     * Use REST API to query for {@link repo}'s contributors
-     */
-    const contributorsResponse = await octokit.request(
-      "GET /repos/{owner}/{repo}/contributors",
-      {
-        owner: process.env.NEXT_PUBLIC_ORG_NAME,
-        repo,
-      }
-    );
+  //   /**
+  //    * Use REST API to query for {@link repo}'s contributors
+  //    */
+  //   const contributorsResponse = await octokit.request(
+  //     "GET /repos/{owner}/{repo}/contributors",
+  //     {
+  //       owner: process.env.NEXT_PUBLIC_ORG_NAME,
+  //       repo,
+  //     }
+  //   );
 
-    const repoContributors: GitHub.GraphQL.API.User[] = [];
+  //   const repoContributors: GitHub.GraphQL.API.User[] = [];
 
-    for (const contributor of contributorsResponse.data) {
-      /**
-       * Filter out non-user contributors such as dependabot
-       */
-      if (contributor.type !== "User") continue;
+  //   for (const contributor of contributorsResponse.data) {
+  //     /**
+  //      * Filter out non-user contributors such as dependabot
+  //      */
+  //     if (contributor.type !== "User") continue;
 
-      /**
-       * Attempt to retrieve GraphQL user information from Organisation members
-       */
-      const orgMember = orgMembersMap[contributor.login!];
+  //     /**
+  //      * Attempt to retrieve GraphQL user information from Organisation members
+  //      */
+  //     const orgMember = orgMembersMap[contributor.login!];
 
-      if (orgMember != null) {
-        repoContributors.push(orgMember);
-        continue;
-      }
+  //     if (orgMember != null) {
+  //       repoContributors.push(orgMember);
+  //       continue;
+  //     }
 
-      /**
-       * Put together a shell GraphQL user for outside contributor
-       */
-      repoContributors.push({
-        login: contributor.login!,
-        name: contributor.name ?? contributor.login!,
-        avatarUrl: contributor.avatar_url!,
-        websiteUrl: contributor.url!,
-        url: "",
-      });
-    }
+  //     /**
+  //      * Put together a shell GraphQL user for outside contributor
+  //      */
+  //     repoContributors.push({
+  //       login: contributor.login!,
+  //       name: contributor.name ?? contributor.login!,
+  //       avatarUrl: contributor.avatar_url!,
+  //       websiteUrl: contributor.url!,
+  //       url: "",
+  //     });
+  //   }
 
-    repoContributorsMap[repo] = repoContributors;
-  }
+  //   repoContributorsMap[repo] = repoContributors;
+  // }
 
-  return {
-    props: {
-      organization,
-      repoContributorsMap,
-    },
-  };
+  // return {
+  //   props: {
+  //     organization,
+  //     repoContributorsMap,
+  //   },
+  // };
 }

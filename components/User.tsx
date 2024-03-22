@@ -1,18 +1,18 @@
 import classNames from "classnames";
 import Image from "next/image";
 
-type UserProps = {
-  user: GitHub.GraphQL.API.User;
-};
+interface UserProps {
+  name: string;
+  imgUrl: string;
+  websiteUrl: string;
+}
 
 export function User(props: UserProps) {
   return (
     <a
       className="group"
       href={
-        props.user.websiteUrl !== null && props.user.websiteUrl !== ""
-          ? props.user.websiteUrl
-          : props.user.url
+        props.websiteUrl
       }
       target="_blank"
       rel="noreferrer"
@@ -24,14 +24,14 @@ export function User(props: UserProps) {
         )}
       >
         <Image
-          src={props.user.avatarUrl}
-          alt={props.user.login}
-          height={24}
-          width={24}
-          className="rounded-full"
+          src={props.imgUrl}
+          alt="alternate image"
+          height={50}
+          width={50}
+          className="-ml-1 object-cover h-10 w-10 rounded-full first:ml-0"
         />
         <span className="group-hover:underline group-focus:underline">
-          {props.user.name}
+          {props.name}
         </span>
       </div>
     </a>
